@@ -1,0 +1,73 @@
+/* INSERT ACCOUNT */
+use ibsardar_db;
+drop procedure if exists ibr_sp_add_acc;
+create or replace procedure ibr_sp_add_acc (
+    	in in_em   varchar(50),
+        in in_pwd  varchar(50),
+        in in_fn   varchar(100),
+        in in_ln   varchar(100),
+        in in_sex  varchar(15),
+        in in_num  varchar(13),
+        in in_act  varchar(15),
+        in in_code varchar(13)
+)
+
+    begin
+        insert into ibr_test_accounts
+                        (Email,
+                         Password,
+                         First_Name,
+                         Last_Name,
+                         Gender,
+                         Phone,
+                         Active,
+                         A_Code)
+                    values  
+                        (in_em,
+                         in_pwd,
+                         in_fn,
+                         in_ln,
+                         in_sex,
+                         in_ph,
+                         in_act,
+                         in_code )
+    end;
+
+/* UPDATE ACCOUNT */
+use ibsardar_db;
+drop procedure if exists ibr_sp_edit_acc;
+create or replace procedure ibr_sp_edit_acc (
+    	in in_data   varchar(100),
+        in in_col    varchar(100),
+        in in_data2  varchar(100),
+	in in_col2   varchar(100)
+)
+
+    begin
+        update ibr_test_accounts
+	set in_col = in_data
+	where in_col2 = in_data2
+    end;
+
+/* REMOVE ACCOUNT */
+use ibsardar_db;
+drop procedure if exists ibr_sp_delete_acc (
+    	in in_data   varchar(100),
+        in in_col    varchar(100)
+)
+	begin
+		delete from ibr_test_accounts
+		where in_col = in_data
+	end;
+
+/* GET FROM ACCOUNT */
+use ibsardar_db;
+drop procedure if exists ibr_sp_get_from_acc (
+    	in in_id_col  int(16),
+        in in_id      int(16)
+)
+	begin
+		select *
+		from ibr_test_accounts
+		where in_id_col = in_id
+	end;
